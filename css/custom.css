@@ -1,0 +1,86 @@
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+}
+
+/*Color del div*/
+.bg-dark {
+    background-color: white!important;
+}
+
+ a,a:hover {
+    color:black;
+    margin:0px 10px 0px 10px;
+}
+
+a .iragoogle{
+    color:blue;
+}
+
+.jumbotron{
+    background-color: white;
+}
+
+
+#centrar {
+    
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    text-align: center;
+ 
+}
+
+.Jesucristo{
+     color:white;
+     font-size: 60px;
+}
+
+.JhonCena{
+     color:gray;
+     font-size: 60px;
+}
+
+.RayoMcwin {
+    background-color: rgb(67, 134, 252); 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+ 
+}
+
+.RayoMcwin:hover {
+    background-color: rgb(34, 99, 214); ;
+    border-color: black;
+}
+
+
+
+.salchicha {
+    display: block;
+    color: rgb(67, 134, 252);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.footer{
+    background-color: rgb(249,249,249);
+}
+
+.linksfooter a {
+    display: block;
+    color: rgb(67, 134, 252);
+    margin:0px 0px 0px 0px
+
+}
+
+.Terminator a{
+    display: block;
+    color: rgb(67, 134, 252);
+    margin:0px 0px 0px 0px
+}

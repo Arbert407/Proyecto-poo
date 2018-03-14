@@ -1,0 +1,108 @@
+.form-control {
+	border: none;
+	border-bottom-style: groove;
+	box-shadow: none;
+}
+
+.form-control:focus {
+	box-shadow: none ;
+	border-color: blue;  
+}
+
+#hola {
+	background-color: black;
+	border-color: black;
+}
+
+#hola:hover{
+	background-color: blue;
+}
+
+#form {
+	color: black;
+	background-color: #ffffff;
+	border: 1px groove rgba(0,0,0,0.1);
+	box-sizing: 100px 100px 100px 100px;
+	padding: 48px 40px 36px 40px;
+	margin: auto;
+	font-family: inherit;
+	width: 450px;
+	display: block;
+}
+
+#div-inicial {
+	height: 101px; 
+	min-height: 30px;
+}
+
+.inicio {
+	text-align: left;
+}
+
+h3 {
+	font-family: inherit;
+}
+
+a:hover{
+	text-decoration: none;
+	color: blue;
+}
+
+.is-valid {
+	border-bottom-color: green;
+}
+
+.is-invalid {
+	border-color: red;
+}
+
+.conejo {
+	background-color: #ffffff;
+	height: 68px;
+	width: 100%;
+/*	box-shadow: inset 1px 1px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.07);*/
+	font-family: 'Product Sans',Arial,sans-serif;
+	opacity: .54;
+	color:inherit;
+	padding: 8px 8px 8px 8px;
+}	
+
+.pato {
+	padding: 10px 30px 10px 30px;
+	
+}
+
+.barra-busqueda {
+	background-color: rgba(100,100,100,.15);
+	border-radius: 2px;
+	border: none;
+	height: 40px;
+	width: 650px;
+	min-width: 400px;
+	padding: 8px 8px 8px 8px;
+}
+
+.fila{
+	display: inline;
+}
+
+
+.sombra{
+	height: 70px;
+    box-shadow: inset 0px 1px 7px black;
+    background-color: rgba(100,100,100,0.1);
+    height: 700px;
+    padding: 40px 10px 40px 10px;
+
+}
+
+.btn-primary {
+	margin: : 10px 20px 10px 20px;
+}
+
+.carpeta{
+	border-style: groove;
+	background-color: #ffffff;
+	padding: 8px 8px 8px 8px;
+	margin: 8px 8px 8px 8px;
+}

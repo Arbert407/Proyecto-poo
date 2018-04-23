@@ -1,73 +1,517 @@
 <!DOCTYPE html>
 <html>
+<meta charset="utf-8">
 <head>
-	<title>Pagina principal</title>
+
+		<style type="text/css">
+
+
+
+
+			.context-menu{
+				width: 270px;
+				height: auto;
+				box-shadow: 0 0 20px 0 #ccc;
+				position: absolute;
+				display: none;
+				background: white;
+			}
+
+			.context-menu ul{
+				list-style: none;
+				padding: 5px 0px 5px 0px;
+			}
+
+			.context-menu ul li:not(.separator){
+				padding: 5px 5px 5px 5px;
+				border-left: 4px solid transparent;
+				cursor: pointer;
+			}
+
+			.context-menu ul li:hover{
+				background: #eee;
+				border-left: 4px solid #666;
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			.context-menux{
+				width: 300px;
+				height: auto;
+				box-shadow: 0 0 20px 0 #ccc;
+				position: absolute;
+				display: none;
+				background: white;
+			}
+
+			.context-menux ul{
+				list-style: none;
+				padding: 5px 0px 5px 0px;
+			}
+
+			.context-menux ul li:not(.separator){
+				padding: 5px 5px 5px 5px;
+				border-left: 4px solid transparent;
+				cursor: pointer;
+			}
+
+			.context-menux ul li:hover{
+				background: #eee;
+				border-left: 4px solid #666;
+			}
+
+
+
+
+
+
+
+
+
+
+			.separator{
+				height: 1px;
+				background: #dedede;
+				margin: 2px 0px 2px 0px;
+			}
+
+
+
+		</style>
+
+
+
+
+
+	
+	<title>Mi unidad - La Nube</title>
 	<link rel="icon" type="image/png" href="imagenes/header.png">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
+
+	
+
+
 	<div class="conejo">
 		<div class="pato fila">
 			LA NUBE
 		</div>
 		<div class="fila">
-			<input type="text" name="busqueda" class="barra-busqueda" placeholder="  busqueda">
-			<div class="fila barra-busqueda">hola</div>
-
+			<div class="boton-busqueda" id="boton-busqueda"><i class="fas fa-search"></i></div>
+			<input type="text" name="busqueda" class="barra-busqueda" placeholder="  buscar en LA NUBE">
+			<div class="icono-derecha circulo" id="icono-usuario"></div>
+			<div class="icono-derecha"><i class="fas fa-bell"></i></div>
+			<div class="icono-derecha"><i class="fas fa-chess-board"></i></div>
 		</div>
 	</div>
-	<div class="pato" >
-		&nbsp;&nbsp;&nbsp;&nbsp;
-		<div class="fila"><button class="btn btn-primary">NUEVO</button></div>
+
+
+	<div class="pato2" >
+		&nbsp;
+		<!-- <div class="fila"><button class="btn btn-primary">NUEVO</button></div> -->
+
+		<div class="btn-group">
+  		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-target="df" aria-haspopup="true" aria-expanded="false">
+    		Nuevo
+  		</button>
+			<ul class="dropdown-menu" id="df">
+				<li><img src="Iconos-123\1.png" class="img-fluid">     Nueva carpeta...</li>
+
+				<li class="separator"></li>
+
+				<li><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
+				<li><img src="Iconos-123\3.png" class="img-fluid">     Subir carpeta...</li>
+
+				<li class="separator"></li>
+
+				<li><img src="Iconos-123\4.png" class="img-fluid">     Documentos de Google</li>
+				<li><img src="Iconos-123\5.png" class="img-fluid">     Hojas de calculo de Google</li>
+				<li><img src="Iconos-123\6.png" class="img-fluid">     Presentaciones de Google</li>
+
+				<li class="separator"></li>
+
+				<li><img src="Iconos-123\7.png" class="img-fluid">     Formularios de Google</li>
+				<li><img src="Iconos-123\8.png" class="img-fluid">     Dibujos de Google</li>
+				<li><img src="Iconos-123\9.png" class="img-fluid">     Google My Maps</li>
+				<li><img src="Iconos-123\10.png" class="img-fluid">     Google Sites</li>
+
+				<li class="separator"></li>
+
+				<li><img src="Iconos-123\11.png" class="img-fluid">     Conectar mas aplicaciones</li>		
+            </ul>
+  </div>
+
+
+
+
+
+
+
+
+
+
+		<div class="fila boton-directorio">
+
+
+		<div class="btn-group">
+  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Mi unidad
+  </button>
+			<ul class="dropdown-menu">
+					<li><img src="Iconos-123\1.png" class="img-fluid">     Nueva carpeta...</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
+					<li><img src="Iconos-123\3.png" class="img-fluid">     Subir carpeta...</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\4.png" class="img-fluid">     Documentos de Google</li>
+					<li><img src="Iconos-123\5.png" class="img-fluid">     Hojas de calculo de Google</li>
+					<li><img src="Iconos-123\6.png" class="img-fluid">     Presentaciones de Google</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\7.png" class="img-fluid">     Formularios de Google</li>
+					<li><img src="Iconos-123\8.png" class="img-fluid">     Dibujos de Google</li>
+					<li><img src="Iconos-123\9.png" class="img-fluid">     Google My Maps</li>
+					<li><img src="Iconos-123\10.png" class="img-fluid">     Google Sites</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\11.png" class="img-fluid">     Conectar mas aplicaciones</li>
+
+				
+          </ul>
+  </div>
+  </div>
+
+
+		<div class="icono-derecha opacidad"><i class="fas fa-cog"></i></div>
+		<div class="icono-derecha opacidad"><i class="fas fa-info-circle"></i></div>
+		<div class="icono-derecha opacidad"><i class="fas fa-list-ol"></i></div>
 	</div>
+
+
 	<div class="sombra container-fluid">
+		<div oncontextmenu="return showContextMenu(event);">
+		 <!--<div oncontextmenu="return showContextMenux(event);">      este es el otro contenedor    
+
+		 <!-</div>-->
+
 		<div class="row">
-			<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-				hola
+			<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 opciones">
+				<div class="opciones1"><i class="far fa-hdd" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;Mi unidad
+				</div>
+				<div class="opciones1"><i class="fas fa-desktop" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;Computadoras
+				</div>
+				<div class="opciones1"><i class="fas fa-users" style="font-size: 20px;"></i>&nbsp;&nbsp;Compartidos conmigo
+				</div>
+				<div class="opciones1"><i class="far fa-clock" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Recientes
+				</div>
+				<div class="opciones1"><i class="fab fa-google" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;Google Fotos
+				</div>
+				<div class="opciones1"><i class="fas fa-star" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;Destacados
+				</div>
+				<div class="opciones1"><i class="fas fa-trash" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Papeleta
+				</div>
+				<div class="opciones1 opciones2"><i class="fas fa-cloud" style="font-size: 20px;"></i>&nbsp;&nbsp;&nbsp;Copias de seguridad
+				</div>
+				<div class="opciones1 opciones3">
+					Se uso 1 GB de 20 TB
+				</div>
+				<div class="opciones1">	
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Aumentar el <br>
+					<i class="fas fa-server"  style="font-size: 20px;"></i>
+					&nbsp;&nbsp;&nbsp; almacenamiento
+				</div>
+				<br>
+				<!--<br>-->
+				<br>
+				<div class="opciones4">
+					Obtener copia de seguridad para Windows
+				</div>
 			</div>
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+			<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+				<div class="tipo-objeto">Carpetas</div>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;0=0+(1-1)
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;ln(e^4x)=4x
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;PHP
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;F=m*a
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;Expedientes...
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;Area 51
 							</div>
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-							<div class="carpeta">
-								hola
+							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+								&nbsp;
+								<i class="fas fa-folder"></i>
+								&nbsp;&nbsp;&nbsp;ln(e^x)=x
 							</div>
 						</div>
+					</div>
+				</div>
+
+				<div class="tipo-objeto">Archivos</div>
+				<div class="container-fluid">
+					<div class="row">
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenu(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/files.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">files.png</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/photo-1-1600.jpg"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">photo-1-160...</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/bbxc.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">bbxc.png</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/files.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">files.png</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/photo-1-1600.jpg"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">photo-1-160...</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/bbxc.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">bbxc.png</div>
+									</div>
+								</div>
+							</div>
+							
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+
+
+
+			<div id="contextMenu" class="context-menu">
+				<ul>
+					<li><img src="Iconos-123\1.png" class="img-fluid">     Nueva carpeta...</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
+					<li><img src="Iconos-123\3.png" class="img-fluid">     Subir carpeta...</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\4.png" class="img-fluid">     Documentos de Google</li>
+					<li><img src="Iconos-123\5.png" class="img-fluid">     Hojas de calculo de Google</li>
+					<li><img src="Iconos-123\6.png" class="img-fluid">     Presentaciones de Google</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\7.png" class="img-fluid">     Formularios de Google</li>
+					<li><img src="Iconos-123\8.png" class="img-fluid">     Dibujos de Google</li>
+					<li><img src="Iconos-123\9.png" class="img-fluid">     Google My Maps</li>
+					<li><img src="Iconos-123\10.png" class="img-fluid">     Google Sites</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\11.png" class="img-fluid">     Conectar mas aplicaciones</li>
+
+				</ul>
+			</div>
+
+
+			<div id="contextMenux" class="context-menux">
+				<ul>
+					<li><img src="Iconos-123\12.png" class="img-fluid">     Vista previa</li>
+					<li><img src="Iconos-123\13.png" class="img-fluid">     Abrir con ></li>
+
+					<li class="separator"></li>
+
+
+					<li><img src="Iconos-123\14.png" class="img-fluid">     Compartir...</li>
+					<li><img src="Iconos-123\15.png" class="img-fluid">     Obtener enlace para compartir</li>
+					<li><img src="Iconos-123\16.png" class="img-fluid">     Mover a...</li>
+					<li><img src="Iconos-123\17.png" class="img-fluid">     Destacar</li>
+					<li><img src="Iconos-123\18.png" class="img-fluid">     Cambiar nombre...</li>
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\19.png" class="img-fluid">     Ver detalles</li>
+					<li><img src="Iconos-123\20.png" class="img-fluid">     Gestionar versiones...</li>
+					<li><img src="Iconos-123\21.png" class="img-fluid">     Hacer una copia</li>
+					<li><img src="Iconos-123\22.png" class="img-fluid">     Descargar</li>
+
+
+					<li class="separator"></li>
+
+					<li><img src="Iconos-123\23.png" class="img-fluid">     Eliminar</li>
+
+
+				</ul>
+			</div>
+
+
+
+
+
+
+
+
+		</div>
+		<script type="text/javascript">
+
+			window.onclick = hideContextMenu;
+			window.onkeydown = listenKeys;
+			var contextMenu = document.getElementById('contextMenu');
+
+			function showContextMenu (event) {
+				contextMenu.style.display = 'block';
+				contextMenu.style.left = event.clientX + 'px';
+				contextMenu.style.top = event.clientY + 'px';
+				return false;
+			}
+
+			function hideContextMenu () {
+				contextMenu.style.display = 'none';
+			}
+
+			function listenKeys (event) {
+				var keyCode = event.which || event.keyCode;
+				if(keyCode == 27){
+					hideContextMenu();
+				}
+			}
+		</script>
+		<script type="text/javascript">
+			window.onclick = hideContextMenux;
+			window.onkeydown = listenKeysx;
+			var contextMenux = document.getElementById('contextMenux');
+
+			function showContextMenux (event) {
+				contextMenux.style.display = 'block';
+				contextMenux.style.left = event.clientX + 'px';
+				contextMenux.style.top = event.clientY + 'px';
+				return false;
+			}
+
+			function hideContextMenux () {
+				contextMenux.style.display = 'none';
+			}
+
+			function listenKeysx (event) {
+				var keyCode = event.which || event.keyCode;
+				if(keyCode == 27){
+					hideContextMenux();
+				}
+			}
+
+		</script>
+
+
+
+
+
+
+
+	<script defer src="js/fontawesome-all.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/transformador.js"></script>
 </body>
 </html>

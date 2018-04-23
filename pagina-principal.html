@@ -3,108 +3,15 @@
 <meta charset="utf-8">
 <head>
 
-		<style type="text/css">
-
-
-
-
-			.context-menu{
-				width: 270px;
-				height: auto;
-				box-shadow: 0 0 20px 0 #ccc;
-				position: absolute;
-				display: none;
-				background: white;
-			}
-
-			.context-menu ul{
-				list-style: none;
-				padding: 5px 0px 5px 0px;
-			}
-
-			.context-menu ul li:not(.separator){
-				padding: 5px 5px 5px 5px;
-				border-left: 4px solid transparent;
-				cursor: pointer;
-			}
-
-			.context-menu ul li:hover{
-				background: #eee;
-				border-left: 4px solid #666;
-			}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			.context-menux{
-				width: 300px;
-				height: auto;
-				box-shadow: 0 0 20px 0 #ccc;
-				position: absolute;
-				display: none;
-				background: white;
-			}
-
-			.context-menux ul{
-				list-style: none;
-				padding: 5px 0px 5px 0px;
-			}
-
-			.context-menux ul li:not(.separator){
-				padding: 5px 5px 5px 5px;
-				border-left: 4px solid transparent;
-				cursor: pointer;
-			}
-
-			.context-menux ul li:hover{
-				background: #eee;
-				border-left: 4px solid #666;
-			}
-
-
-
-
-
-
-
-
-
-
-			.separator{
-				height: 1px;
-				background: #dedede;
-				margin: 2px 0px 2px 0px;
-			}
-
-
-
-		</style>
-
-
-
-
 
 	
 	<title>Mi unidad - La Nube</title>
+	<link href="css/customPP.css" rel="stylesheet">
 	<link rel="icon" type="image/png" href="imagenes/header.png">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
-
-	
 
 
 	<div class="conejo">
@@ -126,6 +33,7 @@
 		<!-- <div class="fila"><button class="btn btn-primary">NUEVO</button></div> -->
 
 		<div class="btn-group">
+			<div oncontextmenu="return showContextMenu(event);">
   		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-target="df" aria-haspopup="true" aria-expanded="false">
     		Nuevo
   		</button>
@@ -155,6 +63,7 @@
 				<li><img src="Iconos-123\11.png" class="img-fluid">     Conectar mas aplicaciones</li>		
             </ul>
   </div>
+   </div>
 
 
 
@@ -169,6 +78,9 @@
 
 
 		<div class="btn-group">
+			<div oncontextmenu="return showContextMenu(event);">
+
+
   <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Mi unidad
   </button>
@@ -199,6 +111,8 @@
 
 				
           </ul>
+
+  </div>
   </div>
   </div>
 
@@ -207,7 +121,7 @@
 		<div class="icono-derecha opacidad"><i class="fas fa-info-circle"></i></div>
 		<div class="icono-derecha opacidad"><i class="fas fa-list-ol"></i></div>
 	</div>
-
+</div>
 
 	<div class="sombra container-fluid">
 		<div oncontextmenu="return showContextMenu(event);">
@@ -290,6 +204,7 @@
 						</div>
 						<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 							<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+
 								&nbsp;
 								<i class="fas fa-folder"></i>
 								&nbsp;&nbsp;&nbsp;Area 51
@@ -383,7 +298,19 @@
 	</div>
 	</div>
 
+	<div oncontextmenu="return showContextMenuxy(event);">
+	</div>
 
+
+	<div id="contextMenuxy" class="context-Menuxy">
+				<ul>
+					<li>Configurar</li>
+					<li>Descargar Copia de Seguridad</li>
+					<li>Combinaciones de teclas</li>
+					<li>Ayuda</li>
+
+				</ul>
+			</div>
 
 			<div id="contextMenu" class="context-menu">
 				<ul>
@@ -418,7 +345,7 @@
 			<div id="contextMenux" class="context-menux">
 				<ul>
 					<li><img src="Iconos-123\12.png" class="img-fluid">     Vista previa</li>
-					<li><img src="Iconos-123\13.png" class="img-fluid">     Abrir con ></li>
+					<li><img src="Iconos-123\13.png" class="img-fluid">     Abrir con </li>
 
 					<li class="separator"></li>
 
@@ -450,6 +377,16 @@
 
 
 
+			
+
+
+
+
+
+
+
+
+
 
 
 		</div>
@@ -468,6 +405,8 @@
 
 			function hideContextMenu () {
 				contextMenu.style.display = 'none';
+				contextMenux.style.display = 'none';
+				contextMenuxy.style.display = 'none';
 			}
 
 			function listenKeys (event) {
@@ -476,8 +415,9 @@
 					hideContextMenu();
 				}
 			}
-		</script>
-		<script type="text/javascript">
+
+
+
 			window.onclick = hideContextMenux;
 			window.onkeydown = listenKeysx;
 			var contextMenux = document.getElementById('contextMenux');
@@ -491,6 +431,8 @@
 
 			function hideContextMenux () {
 				contextMenux.style.display = 'none';
+				contextMenu.style.display = 'none';
+				contextMenuxy.style.display = 'none';
 			}
 
 			function listenKeysx (event) {
@@ -500,10 +442,35 @@
 				}
 			}
 
+
+
+		/*	window.onclick = hideContextMenuxy;
+			window.onkeydown = listenKeysxy;
+			var contextMenuxy = document.getElementById('contextMenuxy');
+
+			function showContextMenuxy (event) {
+				contextMenuxy.style.display = 'block';
+				contextMenuxy.style.left = event.clientX + 'px';
+				contextMenuxy.style.top = event.clientY + 'px';
+				return false;
+			}
+
+			function hideContextMenuxy () {
+				contextMenux.style.display = 'none';
+				contextMenuxy.style.display = 'none';
+				contextMenu.style.display = 'none';
+			}
+
+			function listenKeysxy (event) {
+				var keyCode = event.which || event.keyCode;
+				if(keyCode == 27){
+					hideContextMenuxy();
+				}
+			} */
+
+
+
 		</script>
-
-
-
 
 
 

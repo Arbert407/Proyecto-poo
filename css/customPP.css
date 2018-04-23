@@ -1,0 +1,108 @@
+
+
+
+            .context-menu{
+                width: 270px;
+                height: auto;
+                box-shadow: 0 0 20px 0 #ccc;
+                position: absolute;
+                display: none;
+                background: white;
+            }
+
+            .context-menu ul{
+                list-style: none;
+                padding: 5px 0px 5px 0px;
+            }
+
+            .context-menu ul li:not(.separator){
+                padding: 5px 5px 5px 5px;
+                border-left: 4px solid transparent;
+                cursor: pointer;
+            }
+
+            .context-menu ul li:hover{
+                background: #eee;
+                border-left: 4px solid #666;
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            .context-menux{
+                width: 300px;
+                height: auto;
+                box-shadow: 0 0 20px 0 #ccc;
+                position: absolute;
+                display: none;
+                background: white;
+            }
+
+            .context-menux ul{
+                list-style: none;
+                padding: 5px 0px 5px 0px;
+            }
+
+            .context-menux ul li:not(.separator){
+                padding: 5px 5px 5px 5px;
+                border-left: 4px solid transparent;
+                cursor: pointer;
+            }
+
+            .context-menux ul li:hover{
+                background: #eee;
+                border-left: 4px solid #666;
+            }
+
+
+            .context-menuxy{
+                width: 300px;
+                height: auto;
+                box-shadow: 0 0 20px 0 #ccc;
+                position: absolute;
+                display: none;
+                background: white;
+            }
+
+            .context-menuxy ul{
+                list-style: none;
+                padding: 5px 0px 5px 0px;
+            }
+
+            .context-menuxy ul li:not(.separator){
+                padding: 5px 5px 5px 5px;
+                border-left: 4px solid transparent;
+                cursor: pointer;
+            }
+
+            .context-menuxy ul li:hover{
+                background: #eee;
+                border-left: 4px solid #666;
+            }
+
+
+
+
+
+
+
+
+
+
+            .separator{
+                height: 1px;
+                background: #dedede;
+                margin: 2px 0px 2px 0px;
+            }

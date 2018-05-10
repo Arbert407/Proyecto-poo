@@ -179,7 +179,7 @@ function JSONCorreo(){
                     localStorage.setItem('ruta',respuesta.sql.ruta);
                     localStorage.setItem('rutaActual',respuesta.sql.ruta);
                     localStorage.setItem('tipo',respuesta.sql.tipo);
-                    window.location = 'loginPassword.html';
+                    window.location='loginPassword.html';
                 }else{
                     alert('Este usuario no existe.');
                 }
@@ -279,17 +279,6 @@ function JSONRegistro(){
                 alert("Falta respuesta del servidor");
             }
         });
-    }
-}
-
-
-
-function comprobarCodigo(){
-    if($('#btn-comprobar-codigo').val()=='IS-410'){
-        JSONRegistroAdministrador();
-    }else{
-        alert('Codigo invalido');
-        $('#btn-comprobar-codigo').val('');
     }
 }
 
@@ -657,31 +646,6 @@ function carpetaAtras(){
     }
 }
 
-
-
-function crearCarpeta(){
-    var parametros = 'nombreCarpeta='+$('#btn-nombre-carpeta').val()+'&correo='+localStorage.getItem('correo')+
-                     '&rutaActual='+localStorage.getItem('rutaActual');
-    $.ajax({
-        url: 'ajax/funciones.php?accion=nuevaCarpeta',
-        method: 'GET',
-        data: parametros,
-        dataType: 'html',
-        success: function(respuesta){
-            console.log(respuesta);
-            var j = localStorage.getItem('rutaActual');
-            cargarCarpetas(j);
-            cargarArchivos(j);
-            //$('#exampleModalCenter').attr('aria-hidden','true');
-            //window.showModalDialog('no');
-            $('#exampleModalCenter').modal('toggle');
-            
-        },
-        error: function(error){
-            console.log(error);
-        }
-    });
-}
 /*
 $(document).ready(function(){
 //    var div = document.getElementById('form');

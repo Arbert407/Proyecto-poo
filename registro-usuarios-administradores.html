@@ -37,12 +37,31 @@
 		<div id="text-help6"></div><br>
 		<div style="text-align: right; margin-top: 30px; margin-bottom: 40px">
         	<a id="a-crear-cuenta">
-                <button type="button" class="btn btn-primary" id="btn-crear-cuenta" onclick="JSONRegistroAdministrador();">
-                    CREAR CUENTA 
+                <button type="button" class="btn btn-primary" id="btn-crear-cuenta"   data-toggle="modal" data-target="#exampleModalCenter">
+                    CREAR CUENTA <!--onclick="JSONRegistroAdministrador();"-->
                 </button>
             </a>
         </div>
 	</div>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">Ingrese codigo de acceso</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<input type="text" id="btn-comprobar-codigo" class="form-control" placeholder="Codigo">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="comprobarCodigo();">Comprobar</button>
+			</div>
+			</div>
+		</div>
+  </div>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/transformador.js"></script>

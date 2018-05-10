@@ -226,6 +226,13 @@ a:hover{
 	float: left;
 }
 
+#span-ruta{
+	width: 400px;
+	font-size: 14px;
+	max-width: 400px;	
+	padding: 20px 5px 10px 5px;
+}
+
 .icono-derecha{
 	float: right;
 	padding: 10px 19px 10px 19px;
@@ -240,6 +247,7 @@ a:hover{
 	margin-left: 3px;
 	margin-right: 13px;
 	opacity: initial;
+	opacity: none;
 	border-radius: 100%;
 	background-color: rgba(0,0,200,1);
 	color: rgba(255,255,255,1);
@@ -274,7 +282,7 @@ a:hover{
 }
 
 .btn-primary {
-	margin: : 5px 20px 15px 21px;
+	margin:  5px 20px 15px 21px;
 }
 
 .carpeta{
@@ -318,7 +326,12 @@ a:hover{
 	height: 70%;
 	overflow: hidden;
 	position: relative;
-	background-color: black;
+	background-color: white;
+	text-align: center;
+}
+
+.fdimd{
+	font-size: 100px;
 }
 
 .pie-imagen{
@@ -326,7 +339,7 @@ a:hover{
 	height: 30%;	
 }
 
-.fa-image{
+.fdimd{
 	display: inline;
 	margin-left: 10px;
 	color: red;
@@ -395,7 +408,7 @@ a:hover{
 
 
 .boton-directorio {
-	padding: 10px 50px 10px 130px;
+	padding: 10px 20px 10px 130px;
 	font-weight: 700;
 	font-size: 18px;
 }

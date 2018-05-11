@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+	<title>Bienvenido</title>
+	<link rel="icon" type="image/png" href="imagenes/header.png">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body style="background: url(imagenes/fondo3.png);  background-repeat: no-repeat;background-size: cover;background-position: center center;background-attachment: fixed;">
+
+
+	<div id="div-inicial"></div>
+	<div id="form"  class="animacionCompresion">
+		<div class="inicio">
+		    <h3>Iniciar sesion<br></h3>
+		    Ir a la nube 
+	    </div>	
+		<div class="form-group" style="margin-top: 50px">
+			<div id="datos" style="text-align: center; color: green; font-weight: bold; "></div><br>
+            <label for="exampleInputEmail1">Introduzca la contraseña</label>
+            <input type="password" class="form-control" id="txt-contrasena" aria-describedby="emailHelp" placeholder="contraseña" onkeyup="validarContrasena(this);">
+            <div id="text-help"></div>
+        </div>
+        <div style="margin-top: 10px; margin-bottom: 10px;" align="left">
+        	<a href="respaldo.php">¿Haz olvidado tu contraseña?</a>
+        </div>
+        <div style="text-align: right; margin-top: 30px; margin-bottom: 40px">
+        	<a id="abtn-siguiente" >
+                <button type="button" class="btn btn-primary" id="btn-siguiente" aria-pressed="false" autocomplete="off" onclick="JSONContrasena();">
+                    SIGUIENTE 
+                </button>   
+            </a>
+        </div>
+	</div>
+
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/transformador.js"></script>
+	<script>
+		$(document).ready(function(){
+			var i = localStorage.getItem('nombre');
+			var j = localStorage.getItem('apellido');
+			$('#datos').html(i+' '+j);
+		});
+	</script>
+
+
+</body>
+</html>

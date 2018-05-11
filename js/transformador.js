@@ -3,29 +3,14 @@ function coincidirContrasena(int){
         if($("#txt-password").val().length>5){
             $("#text-help"+int).html('Las contraseñas coinciden.');
             $("#text-help"+int).attr("style","color: green; font-size: 14px;");
-           // $("#a-crear-cuenta").attr("href","loginCorreo.html");
         }else{
             $("#text-help"+int).html(' ');
         }
     } else{
         $("#text-help"+int).html("Las contraseñas no coinciden.");
-      //  $("#a-crear-cuenta").removeAttr("href");
         $("#text-help"+int).attr("style","color: red; font-size: 14px;");
     }
 }
-
-
-
-$(document).ready(function(){
-    $("#boton-busqueda").mousedown(function(e){
-        if(e.which == 3)
-        //1: izquierda, 2: medio/ruleta, 3: derecho
-        {
-            alert("Funciona el reconocimiento");
-            //data-toggle="modal" data-target="#ModalBusqueda"
-        }
-    });
-});
 
 
 
@@ -59,16 +44,12 @@ var validarCampoVacio = function(id,numero){
 
 function validarElemento(id){
     if (id.value.length<1){
-        /*document.getElementById(id).classList.remove('is-valid');
-        document.getElementById(id).classList.add('is-invalid');*/
         $('#text-help').html("Parametro invalido.");
         $('#text-help').addClass("invalid-feedback");
         $('#text-help').removeClass("valid-feedback");
     }
     
     else{
-     /*   document.getElementById(id).classList.remove('is-invalid');
-        document.getElementById(id).classList.add('is-valid');*/
         $('#text-help').html("Parametro valido.");
         $('#text-help').addClass("valid-feedback");
         $('#text-help').removeClass("invalid-feedback");
@@ -76,12 +57,6 @@ function validarElemento(id){
 }
 
 
-/*function textoValidar(id){
-    if (!validarContrasena)
-        $('#'+id).html("Texto invalido");
-    else
-        $('#'+id).html("Texto correcto");
-};*/
 
 function validarContrasena(etiqueta,numero){
     if (numero==null)
@@ -131,28 +106,24 @@ function camposVacios(int){
         if($("#exampleInputEmail1").val() == "" || $("#text-help").html() == "Correo invalido.") {
             return true;
         } else{
-            //$("#abtn-siguiente").attr("href","loginPassword.html");
             return false;
         }
     } else if(int==2){
         if($("#txt-contrasena").val() == "" || $("#text-help").html() == "La contraseña debe tener al menos 6 caracteres.") {
             return true;
         } else{
-            //$("#abtn-siguiente").attr("href","pagina-principal.html");
             return false;
         }
     } else if(int==3){
         if($("#txt-respuesta").val() == "") {
             return true;
         } else{
-            //$("#abtn-siguiente").attr("href","pagina-principal.html");
             return false;
         }
     } else if(int==4 || int==6){
         if($("#txt-nombre").val() == "" || $("#txt-apellido").val() == "" || $("#txt-email").val() == "" || $("#txt-password2").val() == "" || $("#txt-respuesta-registro").val() == "" || $("#text-help").html() == "Correo invalido." || $("#text-help1").html() == "Parametro invalido." || $("#text-help2").html() == "Parametro invalido." || $("#text-help").html() == "Correo invalido." || $("#text-help4").html() == "La contraseña debe tener al menos 6 caracteres." || $("#text-help5").html() == "La contraseña debe tener al menos 6 caracteres." || $("#text-help6").html() == "Las contraseñas no coinciden." ) {
             return true;
         } else{
-            //$("#a-crear-cuenta").attr("href","loginCorreo.html");
             return false;
         }
     } 
@@ -179,7 +150,7 @@ function JSONCorreo(){
                     localStorage.setItem('ruta',respuesta.sql.ruta);
                     localStorage.setItem('rutaActual',respuesta.sql.ruta);
                     localStorage.setItem('tipo',respuesta.sql.tipo);
-                    window.location = 'loginPassword.html';
+                    window.location = 'loginPassword.php';
                 }else{
                     alert('Este usuario no existe.');
                 }
@@ -214,7 +185,7 @@ function JSONCorreoAdministrador(){
                     localStorage.setItem('ruta',respuesta.sql.ruta);
                     localStorage.setItem('rutaActual',respuesta.sql.ruta);
                     localStorage.setItem('tipo',respuesta.sql.tipo);
-                    window.location='loginPassword.html';
+                    window.location='loginPassword.php';
                 }else{
                     alert('Este usuario no existe.');
                 }            
@@ -240,7 +211,7 @@ function JSONContrasena(){
             success: function(respuesta){
                 console.log(respuesta);          
                 if(respuesta.valor == 1){
-                    window.location = 'pagina-principal.html';
+                    window.location = 'pagina-principal.php';
                 }else{
                     alert('contraseña invalida');
                 }
@@ -269,7 +240,7 @@ function JSONRegistro(){
                 console.log(respuesta);            
                 if(respuesta.valor == 1){
                     alert('Cuenta creada con exito!');
-                    window.location = 'loginCorreo.html';
+                    window.location = 'loginCorreo.php';
                 }else{
                     alert('contraseña invalida');
                 }
@@ -285,12 +256,25 @@ function JSONRegistro(){
 
 
 function comprobarCodigo(){
-    if($('#btn-comprobar-codigo').val()=='IS-410'){
-        JSONRegistroAdministrador();
-    }else{
-        alert('Codigo invalido');
-        $('#btn-comprobar-codigo').val('');
-    }
+    $.ajax({
+        url:"ajax/funciones.php?accion=comprobarCodigo",
+        method: "GET",
+        data: 'codigo='+$('#btn-comprobar-codigo').val(),
+        dataType: "json",
+        success: function(respuesta){
+            console.log(respuesta);
+            if(respuesta.valor == 1){
+                JSONRegistroAdministrador();
+            }else{
+                alert('Codigo invalido');
+                $('#btn-comprobar-codigo').val('');
+            }
+        },
+        error: function(error){
+            console.log(error);
+            alert("Falta respuesta del servidor");
+        }
+    });
 }
 
 
@@ -309,7 +293,7 @@ function JSONRegistroAdministrador(){
                 console.log(respuesta);
                 if(respuesta.valor == 1){
                     alert('Cuenta creada con exito!');
-                    window.location = 'loginCorreo.html';
+                    window.location = 'loginRoot.php';
                 }else{
                     alert('contraseña invalida');
                 }
@@ -336,7 +320,7 @@ function JSONRespaldo(){
             success: function(respuesta){
                 if(respuesta.valor == 1){
                     alert('tu contraseña es: "'+respuesta.sql.contrasena+'" trata de no olvidarla de nuevo.');
-                    window.location='pagina-principal.html';
+                    window.location='pagina-principal.php';
                 }else{
                     alert('No es la respuesta correcta');
                 }
@@ -354,7 +338,7 @@ function JSONRespaldo(){
 $(document).ready(function(){
     $("#icono-usuario").html(localStorage.getItem('nombre')[0]);
     if(localStorage.getItem('tipo') == 1){
-        $('#icono-usuario').css('background-color','gold');
+        $('#icono-usuario').css('background-color','#00ff00');
     }else{
         $('#icono-usuario').css('background-color','blue');
     }
@@ -374,9 +358,9 @@ function acortarNombres(id){
 
 
 function acortarRuta(id){
-    if(id.length > 90){
-        var temp = id.substr(0,90);
-        return temp+'...';
+    if(id.length > 80){
+        var temp = id.substr(id.length-80);
+        return '...'+temp;
     }else{
         return id;
     }
@@ -403,7 +387,7 @@ $(document).ready(function(){
             for(var i=0; i<respuesta.carpetas.length; i++){
                 //console.log(respuesta.carpetas[i]);
                 $('#row-carpetas').append('<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">'+
-                '<div class="carpeta" oncontextmenu="return showContextMenux(event);" onclick="nuevaRuta(\''+respuesta.carpetas[i]+'\')">'+
+                '<div class="carpeta" oncontextmenu="eliminarCarpeta(\''+respuesta.carpetas[i]+'\');return showContextMenux(event);" onclick="nuevaRuta(\''+respuesta.carpetas[i]+'\')">'+
                     '&nbsp;'+
                     '<i class="fas fa-folder"></i>'+
                     '&nbsp;&nbsp;&nbsp;'+acortarNombres(respuesta.carpetas[i])+
@@ -479,7 +463,7 @@ function cargarCarpetas(ruta){
             for(var i=0; i<respuesta.carpetas.length; i++){
                 //console.log(respuesta.carpetas[i]);
                 $('#row-carpetas').append('<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">'+
-                '<div class="carpeta" oncontextmenu="return showContextMenux(event);" onclick="nuevaRuta(\''+respuesta.carpetas[i]+'\')">'+
+                '<div class="carpeta" oncontextmenu="eliminarCarpeta(\''+respuesta.carpetas[i]+'\');return showContextMenux(event);" onclick="nuevaRuta(\''+respuesta.carpetas[i]+'\')">'+
                     '&nbsp;'+
                     '<i class="fas fa-folder"></i>'+
                     '&nbsp;&nbsp;&nbsp;'+acortarNombres(respuesta.carpetas[i])+
@@ -589,13 +573,13 @@ $(document).ready(function(){
     }
 });
 
-function actualizarRuta(){
+/*function actualizarRuta(){
     if(localStorage.getItem('tipo')==2){
         var q = $('#span-ruta').val();
         $('#span-ruta').val('home/' + q.substr(6));
         console.log($('#span-ruta').val());
     }
-}
+}*/
 
 
 
@@ -617,9 +601,9 @@ function nuevaRuta(nombre){
             cargarArchivos(j);
             if(localStorage.getItem('tipo')==2){
                 e = 'home'+j.substr(6);
-                $('#span-ruta').html(e);
+                $('#span-ruta').html(acortarRuta(e));
             }else{
-                $('#span-ruta').html(j);
+                $('#span-ruta').html(acortarRuta(j));
             }
             
             //actualizarRuta();
@@ -647,11 +631,11 @@ function carpetaAtras(){
         cargarArchivos(localStorage.getItem('rutaActual'));
         if(localStorage.getItem('tipo')==2){
             e = 'home'+localStorage.getItem('rutaActual').substr(6);
-            $('#span-ruta').html(e);
+            $('#span-ruta').html(acortarRuta(e));
         }else{
-            $('#span-ruta').html(localStorage.getItem('rutaActual'));
+            $('#span-ruta').html(acortarRuta(localStorage.getItem('rutaActual')));
         }
-        
+            
         //$('#span-ruta').html(e);
         //actualizarRuta();
     }
@@ -682,8 +666,70 @@ function crearCarpeta(){
         }
     });
 }
-/*
-$(document).ready(function(){
-//    var div = document.getElementById('form');
-    $('#form').addClass('animacionRebote');
-});*/
+
+
+
+function eliminarCarpeta(nombre){
+    //$(id).attr(download="download");  
+    localStorage.setItem('archivo',nombre);
+    var src = localStorage.getItem('rutaActual') + nombre;
+    console.log('ruta:'+src);
+}
+
+
+
+function eliminarArchivo(){
+      
+    /*if(localStorage.getItem('tipo')){
+        var parametros = 'nombreArchivo='+localStorage.getItem('rutaActual')+localStorage.getItem('archivo');
+    }else{
+        var parametros = 'nombreArchivo='+localStorage.getItem('rutaActual')+localStorage.getItem('archivoCarpeta');
+    }*/
+    var parametros = 'nombreArchivo='+localStorage.getItem('rutaActual')+localStorage.getItem('archivo');
+    $.ajax({
+        url: 'ajax/funciones.php?accion=eliminarArchivo',
+        method: 'GET',
+        data: parametros,
+        dataType: 'json',
+        success: function(respuesta){
+            console.log(respuesta);
+            if(respuesta.valor == 1){
+                $('#row-archivos').html('');
+                $('#row-carpetas').html('');
+                cargarCarpetas(localStorage.getItem('rutaActual'));
+                cargarArchivos(localStorage.getItem('rutaActual'));
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+
+
+function buscar(){
+    var parametros = 'ruta='+localStorage.getItem('rutaActual')+'&string='+$('#input-busqueda').val();
+    $.ajax({
+        url: 'ajax/funciones.php?accion=buscar',
+        method: 'GET',
+        data: parametros,
+        dataType: 'json',
+        success: function(respuesta){
+            console.log(respuesta);
+            if(respuesta.valor == 1){
+                $('#row-archivos').html('');
+                $('#row-carpetas').html('');
+                cargarCarpetas(localStorage.getItem('rutaActual'));
+                cargarArchivos(localStorage.getItem('rutaActual'));
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}
+
+
+
+

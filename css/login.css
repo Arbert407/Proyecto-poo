@@ -189,7 +189,7 @@ a:hover{
 	width: 100%;
 /*	box-shadow: inset 1px 1px 0 rgba(0,0,0,.1), inset 0 -1px 0 rgba(0,0,0,.07);*/
 	font-family: 'Product Sans',Arial,sans-serif;
-	opacity: .54;
+	opacity: none;
 	color:inherit;
 	padding: 10px 8px 10px 8px;
 }	
@@ -264,9 +264,9 @@ a:hover{
 	position: absolute;
 	/*height: 70px;*/
     box-shadow: inset 0px 1px 10px rgb(100,100,100);
-    background-color: rgb(242,242,242);
-    /*height: 700px;*/
-    height: 83%;
+    background-color: rgb(247, 247, 247);
+    height: 563px;
+    /*height: 80%;*/
     width: 100%;
     /*padding: 5px 5px 5px 5px;*/
     margin-left: 0px;
@@ -412,3 +412,64 @@ a:hover{
 	font-weight: 700;
 	font-size: 18px;
 }
+
+
+
+#div-contenido{
+	margin-top: 10px;
+	height: 520px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	width: 110%;
+}
+
+
+
+#div-contenido::-webkit-scrollbar{
+	width: 8px;
+}
+
+
+
+#div-contenido::-webkit-scrollbar-track{
+	border-radius: 50%;
+}
+
+
+
+#div-contenido::-webkit-scrollbar-thumb {
+    background: rgb(232, 232, 232); 
+    border-radius: 50px;
+}
+
+
+
+#div-contenido::-webkit-scrollbar-thumb:hover {
+    background: rgb(169, 169, 169); 
+    border-radius: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

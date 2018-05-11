@@ -160,7 +160,27 @@
 
 
         case 'eliminarArchivo':
-            unlink($_GET['nombreArchivo']);
+            if(is_dir('../'.$_GET['nombreArchivo'])){
+                $val = rmdir('../'.$_GET['nombreArchivo']);
+                $salida['valor'] = 'Es dir';
+            }else{
+                $val = unlink('../'.$_GET['nombreArchivo']);
+            }
+            if($val){
+                $salida['valor'] = 1;
+            }else{
+                $salida['valor'] = 0;
+            }
+        break;
+
+
+        
+        case 'comprobarCodigo':
+            if($_GET['codigo'] == 'IS-410'){
+                $salida['valor'] = 1;
+            }else{
+                $salida['valor'] = 0;
+            }
         break;
     }
 

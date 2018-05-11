@@ -1,0 +1,215 @@
+<!--	<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;0=0+(1-1)
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;ln(e^4x)=4x
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;PHP
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;F=m*a
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;Expedientes...
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;Area 51
+								</div>
+							</div>->
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta" oncontextmenu="return showContextMenux(event);">
+									&nbsp;
+									<i class="fas fa-folder"></i>
+									&nbsp;&nbsp;&nbsp;ln(e^x)=x
+								</div>
+							</div>-->
+
+                            		<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenu(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/files.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">files.png</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/photo-1-1600.jpg"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">photo-1-160...</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/bbxc.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">bbxc.png</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/files.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">files.png</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/photo-1-1600.jpg"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">photo-1-160...</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								<div class="carpeta-archivo" oncontextmenu="return showContextMenux(event);">
+									<div class="div-imagen">
+										<img class="imagen" src="imagenes/bbxc.png"></img>
+									</div>
+									<div class="pie-imagen">
+										<i class="fas fa-image"></i>
+										<div class="nombre-archivo">bbxc.png</div>
+									</div>
+								</div>
+							</div>-->
+
+                            <!--target="blank" para abrir una nueva ventana -->
+
+
+							<!--<script type="text/javascript">	
+	$(document).ready(function () {
+		$(".btn-primary").click(function () {
+			alert("Registro completo");
+		});
+	});
+</script>-->
+// $("#a-crear-cuenta").attr("href","loginCorreo.html");
+//  $("#a-crear-cuenta").removeAttr("href");
+
+
+
+$(document).ready(function(){
+    $("#boton-busqueda").mousedown(function(e){
+        if(e.which == 3)
+        //1: izquierda, 2: medio/ruleta, 3: derecho
+        {
+            alert("Funciona el reconocimiento");
+            //data-toggle="modal" data-target="#ModalBusqueda"
+        }
+    });
+});
+
+/*document.getElementById(id).classList.remove('is-valid');
+        document.getElementById(id).classList.add('is-invalid');*/
+
+
+/*function textoValidar(id){
+    if (!validarContrasena)
+        $('#'+id).html("Texto invalido");
+    else
+        $('#'+id).html("Texto correcto");
+};*/
+
+/*   document.getElementById(id).classList.remove('is-invalid');
+        document.getElementById(id).classList.add('is-valid');*/
+
+		//$("#abtn-siguiente").attr("href","loginPassword.html");
+
+		//$("#abtn-siguiente").attr("href","pagina-principal.html");
+//$("#abtn-siguiente").attr("href","pagina-principal.html");
+
+//$("#a-crear-cuenta").attr("href","loginCorreo.html");
+
+/*$('body').click(function(e){
+    var id = e.target.tagName;
+    //alert(id);
+   localStorage.setItem('tipo',id)
+});*/
+
+/*
+$(document).ready(function(){
+//    var div = document.getElementById('form');
+    $('#form').addClass('animacionRebote');
+});*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,9 @@
+<?php
+	include("class/class-validacion.php");
+	$q = new Validacion();
+	$q->ejecutarValidacion();
+	$q->crearCasoLogin();
+?>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html>
@@ -17,7 +23,7 @@
 		    Ir a la nube 
 	    </div>	
 		<div class="form-group" style="margin-top: 50px">
-			<div id="datos" style="text-align: center; color: green; font-weight: bold; "></div><br>
+			<div id="datos" style="text-align: center; color: #009dff; font-weight: bold; font-size: 18px; "></div><br>
             <label for="exampleInputEmail1">Introduzca la contraseña</label>
             <input type="password" class="form-control" id="txt-contrasena" aria-describedby="emailHelp" placeholder="contraseña" onkeyup="validarContrasena(this);">
             <div id="text-help"></div>

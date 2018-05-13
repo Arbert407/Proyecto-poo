@@ -98,11 +98,78 @@
 
 
 
-
-
-
             .separator{
                 height: 1px;
                 background: #dedede;
                 margin: 2px 0px 2px 0px;
             }
+
+
+            div #div-filex{
+                position: relative;;
+                padding: 10px;
+                margin: 50px;
+                width: 150px;
+                background-color: #2499e3;
+                -webkit-border-radius:5px;
+                -webkit-box-shadow:0px 3px 0px #1a71a9;
+
+
+            }
+
+            input #btn-seleccionarx{
+                position:absolute;
+                top: 0px;
+                left: 0px;
+                left: 0px;
+                right: 0px;
+                bottom:0px;
+                width: 100px;
+                height: 100px;
+                opacity: 0;
+            }
+
+            p #textox{
+                text-align: center;
+                color: white;
+            }
+
+
+                .boton_D1{
+        background-color: rgb(66, 133, 244); 
+        color:white;
+        border: none;
+        padding: 10px;
+        font-size: 18.5px;
+        border-radius: 99px;
+        
+
+    }
+
+    .Links_D1 a{
+        text-decoration: none;
+        color: black;
+        display: block;
+        padding: 13px;
+
+
+    }
+
+    .Links_D1{
+        background-color:#f9f9f9;
+        width: 185px; 
+        display: none;
+    }
+
+    .Links_D1 a:hover{
+        background-color: #f1f1f1;
+    }
+
+    .desplegable1:hover .Links_D1{
+        display:block;
+    }
+
+
+    .desplegable1{
+        position: absolute;
+    }

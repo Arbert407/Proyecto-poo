@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("../class/class-conexion.php");
     $conexion = new Conexion();
     $salida = array();
@@ -7,7 +8,7 @@
 
 
         case 'procesarCorreo':
-            $sql = sprintf('SELECT correo, tipo, nombre, apellido, carpeta, '.
+            $sql = sprintf('SELECT correo, contrasena, tipo, nombre, apellido, carpeta, '.
                            'ruta FROM tbl_usuarios WHERE correo="%s"', 
                            $_GET['correo']);
             $resultado = $conexion->ejecutarConsulta($sql);
@@ -15,6 +16,18 @@
                 if($fila['correo'] == $_GET['correo'] && $fila['tipo'] == $_GET['tipo']){
                     $salida['valor'] = 1;
                     $salida['sql'] = $fila;
+                    $_SESSION['usr'] = $_GET['correo'];
+                    $_SESSION['carpeta'] = $fila['carpeta'];
+                    //$_SESSION['contrasena'] = $fila['contrasena'];
+                    $sql2 = sprintf('SELECT pswsha1 '.
+                           'FROM tbl_usuarios WHERE correo="%s"', 
+                           $_GET['correo']);
+                    $resultado2 = $conexion->ejecutarConsulta($sql2);
+                    $fila2 = $conexion->obtenerFila($resultado2);       
+                    //echo $fila2['pswsha1']."\n";
+                    $_SESSION['pswsha1'] = $fila2['pswsha1'];
+                    //echo $_SESSION['pswsha1'];
+                    //echo $_SESSION['usr']."\n";
                 }else{
                     $salida['valor'] = 0;
                 }
@@ -24,12 +37,14 @@
 
 
         case 'procesarContrasena':
-            $sql = sprintf('SELECT contrasena FROM tbl_usuarios WHERE correo = "%s"', $_GET['correo']);
+            $sql = sprintf('SELECT carpeta FROM tbl_usuarios WHERE pswsha1 = sha1("%s") AND correo = "%s"', $_GET['contrasena'], $_GET['correo']);
             $resultado = $conexion->ejecutarConsulta($sql);
             if($resultado){
                 $fila = $conexion->obtenerFila($resultado);
-                if($fila['contrasena'] == $_GET['contrasena']){
+                if($fila['carpeta'] == $_SESSION['carpeta']){
+                //if(TRUE){        
                     $salida['valor'] = 1;
+                    //$_SESSION['psw'] = $_GET['contrasena'];
                 }
             }else{
                 $salida['valor'] = 0;
@@ -62,8 +77,8 @@
                 $ruta = 'data/'.$carpeta_creada.'/';
             }
             $sql = sprintf('INSERT INTO tbl_usuarios(nombre, apellido, correo, '.
-                           'contrasena, respuesta, tipo, carpeta, ruta) '.
-                           'VALUES("%s","%s","%s","%s","%s",%s,%s,"%s")',
+                           'contrasena, respuesta, tipo, carpeta, ruta, pswsha1 ) '.
+                           'VALUES("%s","%s","%s","%s","%s",%s,%s,"%s",sha1("%s"))',
                            $_GET['nombre'] ,
                            $_GET['apellido'] ,
                            $_GET['email'] ,
@@ -71,7 +86,8 @@
                            $_GET['respuesta'] ,
                            $_GET['tipo'] ,
                            $carpeta_creada ,
-                           $ruta );
+                           $ruta ,
+                           $_GET['contrasena1']);
             $resultado = $conexion->ejecutarConsulta($sql);
             if($resultado){
                 $salida['valor'] = 1;
@@ -96,15 +112,15 @@
             $carpetas = array();
             $archivos = array();
             $total = array();
-            $directorio = opendir('../'.$var);//ruta actual
+            $directorio = opendir('../'.$var);
             $dir = '../'.$var; 
-            while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+            while ($archivo = readdir($directorio)) 
             {
                 $total[] = $archivo;
-                if (is_dir($dir.'/'.$archivo))//verificamos si es o no un directorio
+                if (is_dir($dir.'/'.$archivo))
                 {
                     if( $archivo!='.' && $archivo!='..'){
-                        $carpetas[] = $archivo; //de ser un directorio lo envolvemos entre corchetes
+                        $carpetas[] = $archivo;
                     }
                 }
                 else
@@ -112,6 +128,7 @@
                     $archivos[] = $archivo;
                 }
             }
+            $_SESSION['rutaActual'] = $dir;
             $salida['archivos'] = $archivos;
             $salida['carpetas'] = $carpetas;
             $salida['total'] = $total;
@@ -124,15 +141,15 @@
             $archivos = array();
             $total = array();
             //echo $_GET['rutaActual'];
-            $directorio = opendir('../'.$_GET['rutaActual']);//ruta actual
+            $directorio = opendir('../'.$_GET['rutaActual']);
             $dir = '../'.$_GET['rutaActual']; 
-            while ($archivo = readdir($directorio)) //obtenemos un archivo y luego otro sucesivamente
+            while ($archivo = readdir($directorio))
             {
                 $total[] = $archivo;
-                if (is_dir($dir.'/'.$archivo))//verificamos si es o no un directorio
+                if (is_dir($dir.'/'.$archivo))
                 {
                     if( $archivo!='.' && $archivo!='..'){
-                        $carpetas[] = $archivo; //de ser un directorio lo envolvemos entre corchetes
+                        $carpetas[] = $archivo;
                     }
                 }
                 else
@@ -140,6 +157,7 @@
                     $archivos[] = $archivo;
                 }
             }
+            $_SESSION['rutaActual'] = $dir;
             $salida['archivos'] = $archivos;
             $salida['carpetas'] = $carpetas;
             $salida['total'] = $total;
@@ -174,7 +192,6 @@
         break;
 
 
-        
         case 'comprobarCodigo':
             if($_GET['codigo'] == 'IS-410'){
                 $salida['valor'] = 1;
@@ -182,14 +199,29 @@
                 $salida['valor'] = 0;
             }
         break;
+
+
+        case 'buscarArchivo':
+            $directorio = '../'.$_GET['ruta'];
+            //$directorio = '../'.substr($_GET['ruta'], 0, strlen($_GET['ruta'])-1);
+            $salida['rutaDeArchivo'] = buscar($directorio, $_GET['string']);
+            $salida['a1'] = $directorio;
+            $salida['string'] = $_GET['string'];
+            if(buscar($directorio, $_GET['string']) != FALSE){
+                $salida['valor'] = 1;
+                $salida['rutaDeArchivo'] = buscar('../'.$_GET['ruta'],$_GET['string']);
+                $salida['string'] = $_GET['string'];
+            }else{
+                $salida['valor'] = 0;
+            }
+        break;
+
+
+        
     }
 
 
 
-    //$carpeta_creada = obtenerCarpeta($conexion);
-    //$ruta = 'data/'.$carpeta_creada.'/';
-    //$salida['carpeta'] = $carpeta_creada;
-    //echo $ruta;
     function obtenerCarpeta($conexion){
         $sql = 'SELECT codigo_usuario FROM tbl_usuarios'
         . ' ORDER BY codigo_usuario ASC';
@@ -202,28 +234,31 @@
     }
 
 
-
-    function listar_directorios_ruta($ruta){ 
-        // abrir un directorio y listarlo recursivo 
-        if (is_dir($ruta)) { 
-           if ($dh = opendir($ruta)) { 
-              while (($file = readdir($dh)) !== false) { 
-                 //esta línea la utilizaríamos si queremos listar todo lo que hay en el directorio 
-                 //mostraría tanto archivos como directorios 
-                 //echo "<br>Nombre de archivo: $file : Es un: " . filetype($ruta . $file); 
-                 if (is_dir($ruta . $file) && $file!="." && $file!=".."){ 
-                    //solo si el archivo es un directorio, distinto que "." y ".." 
-                    echo "<br>Directorio: $ruta$file"; 
-                    listar_directorios_ruta($ruta . $file . "/"); 
-                 } 
-              } 
-           closedir($dh); 
-           } 
-        }else 
-           echo "<br>No es ruta valida"; 
-     }
-
-
+     
+    function buscar($dir, $archivo_buscar)
+    {   
+        if (is_dir($dir)){
+            $d = opendir($dir); 
+            while($archivo = readdir($d) ){
+                if ($archivo != "." AND $archivo != ".."){
+                    if (is_file($dir.'/'.$archivo)){
+                        if ($archivo == $archivo_buscar){
+                            return ($dir.'/'.$archivo);
+                        }   
+                    }
+                    if (is_dir($dir.'/'.$archivo)){
+                        $r = buscar($dir.'/'.$archivo,$archivo_buscar);
+                        if ( basename($r) == $archivo_buscar ){
+                            return $r;
+                        }    
+                    }    
+                }         
+            } 
+        }
+        return FALSE;
+    }
+     
+     
 
     echo json_encode($salida);
     $conexion->cerrarConexion();

@@ -1,3 +1,8 @@
+<?php
+	include("class/class-validacion.php");
+	$q = new Validacion();
+	$q->ejecutarValidacionRespaldo();
+?>
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html>

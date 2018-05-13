@@ -1,3 +1,31 @@
+<?php
+include('class/class-validacion.php');
+$a = new Validacion();
+$d = $a->ejecutarValidacion();
+$d = $a->ejecutarValidacionRespaldo();
+$d = $a->ejecutarValidacionCargar();
+//echo $d."asdfadfasdfasfasdfasfasdfasdfasdf";
+
+/*session_start();
+if (!isset($_SESSION["rutaActual"])){
+		header("Location: index.html");
+}else{
+	$d = substr($_SESSION["rutaActual"],3);
+}*/
+if(isset($_FILES['file']))
+{
+	$file_name = $_FILES['file']['name'];
+	$file_tmp = $_FILES['file']['tmp_name'];
+
+	$upload_folder = $d; //Esta es la carpeta a la que se subira :v
+
+	$movefile = move_uploaded_file($file_tmp, $upload_folder.$file_name);
+
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -12,12 +40,15 @@
 
 
 	<div class="conejo">
-		<span class="pato fila">LA NUBE</span>
+		<span class="pato fila"><img src="imagenes\sadasd.png" class="img-fluid"><b> Drive</b></span>
 		<span class="fila">
-			<span class="boton-busqueda" id="boton-busqueda"><i class="fas fa-search"></i></span>
-			<input type="text" name="busqueda" id="input-buscar" class="barra-busqueda" placeholder="  buscar en LA NUBE">
+			<span class="boton-busqueda" id="boton-busqueda" onclick="buscar();"><i class="fas fa-search"></i></span>
+			<input type="text" name="busqueda" id="input-buscar" class="barra-busqueda" placeholder="  buscar archivos en LA NUBE">
 		</span>
-		<span class="icono-derecha circulo " style="margin-right: 14px;margin-left: 5px" id="icono-usuario"></span>
+		<span class="icono-derecha circulo " style="margin-right: 14px;margin-left: 5px" id="icono-usuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></span>
+			<div class="dropdown-menu" aria-labelledby="icono-usuario">
+				<a class="dropdown-item" href="salir.php">Salir</a>
+			</div>
 		<span class="icono-derecha"><i class="fas fa-bell"></i></span>
 		<span class="icono-derecha"><i class="fas fa-chess-board"></i></span>
 	</div>
@@ -33,7 +64,7 @@
 				<ul class="dropdown-menu" id="df">
 					<li data-toggle="modal" data-target="#exampleModalCenter"><img src="Iconos-123\1.png" class="img-fluid">     Nueva carpeta...</li>
 					<li class="separator"></li>
-					<li><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
+					<li data-toggle="modal" data-target="#bd-example-modal-sm"><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
 					<li><img src="Iconos-123\3.png" class="img-fluid">     Subir carpeta...</li>
 					<li class="separator"></li>
 					<li><img src="Iconos-123\4.png" class="img-fluid">     Documentos de Google</li>
@@ -49,7 +80,7 @@
        		    </ul>
         	</span>
    		</div>
-		<span class="fila boton-directorio">
+		<span class="boton-directorio-alfa">
 			<div class="btn-group">
 				<div onclick="return showContextMenu(event);">
 					<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -58,7 +89,7 @@
 					<ul class="dropdown-menu">
 						<li data-toggle="modal" data-target="#exampleModalCenter"><img src="Iconos-123\1.png" class="img-fluid">     Nueva carpeta...</li>
 						<li class="separator"></li>
-						<li><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
+						<li data-toggle="modal" data-target="#bd-example-modal-sm"><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
 						<li><img src="Iconos-123\3.png" class="img-fluid">     Subir carpeta...</li>
 						<li class="separator"></li>
 						<li><img src="Iconos-123\4.png" class="img-fluid">     Documentos de Google</li>
@@ -109,6 +140,10 @@
 					<div class="tipo-objeto">Archivos</div>
 					<div class="container-fluid"><div class="row" id="row-archivos"></div></div>
 				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<div class="tipo-objeto" id="resultado-mensaje"></div><br><br>
+					<div id="resultado-respuesta"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -134,11 +169,48 @@
 	</div>
 	
 
+	<div class="modal fade" id="bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Subir archivo</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form method="POST" enctype="multipart/form-data" id="form-subir"><br><br>
+						<input type="file" name="file"><br><br>
+						<input type="submit" class="btn btn-primary" style="margin-left: 390px;" value="Subir">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="modal-imagen" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Vista previa</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="imagen-de-modal">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div id="contextMenu" class="context-menu">
 		<ul>
 			<li data-toggle="modal" data-target="#exampleModalCenter"><img src="Iconos-123\1.png" class="img-fluid">     Nueva carpeta...</li>
 			<li class="separator"></li>
-			<li><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
+			<li data-toggle="modal" data-target="#bd-example-modal-sm"><img src="Iconos-123\2.png" class="img-fluid">     Subir archivo...</li>
 			<li><img src="Iconos-123\3.png" class="img-fluid">     Subir carpeta...</li>
 			<li class="separator"></li>
 			<li><img src="Iconos-123\4.png" class="img-fluid">     Documentos de Google</li>
@@ -157,7 +229,7 @@
 
 	<div id="contextMenux" class="context-menux">
 		<ul>
-			<li><img src="Iconos-123\12.png" class="img-fluid">     Vista previa</li>
+			<li id="li-vista"><img src="Iconos-123\12.png" class="img-fluid">     Vista previa</li>
 			<li><img src="Iconos-123\13.png" class="img-fluid">     Abrir con </li>
 			<li class="separator"></li>
 			<li><img src="Iconos-123\14.png" class="img-fluid">     Compartir...</li>
@@ -188,6 +260,7 @@
 			contextMenu.style.display = 'block';
 			contextMenu.style.left = (event.clientX) + 'px';
 			contextMenu.style.top = (event.clientY) + 'px';
+			//contextMenux.attr.aria-hidden = 'true';
 			return false;
 		}
 
@@ -200,6 +273,7 @@
 			var keyCode = event.which || event.keyCode;
 			if(keyCode == 27){
 				hideContextMenu();
+				//hideContextMenux();
 			}
 		}
 
@@ -207,18 +281,21 @@
 			contextMenux.style.display = 'block';
 			contextMenux.style.left = event.clientX + 'px';
 			contextMenux.style.top = event.clientY + 'px';
+			//contextMenu.style.display = 'none';
 			return false;
 		}
 
 		function hideContextMenux () {
-			contextMenux.style.display = 'none';
 			contextMenu.style.display = 'none';
+			contextMenux.style.display = 'none';
+			
 		}
 
 		function listenKeysx (event) {
 			var keyCode = event.which || event.keyCode;
 			if(keyCode == 27){
 				hideContextMenux();
+				//hideContextMenu();
 			}
 		}
 	</script>

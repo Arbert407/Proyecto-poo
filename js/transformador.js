@@ -347,8 +347,8 @@ $(document).ready(function(){
 
 
 function acortarNombres(id){
-    if(id.length > 13){
-        var temp = id.substr(0,13);
+    if(id.length > 10){
+        var temp = id.substr(0,10);
         return temp+'...';
     }else{
         return id;
@@ -376,6 +376,7 @@ $(document).ready(function(){
         data: 'ruta='+localStorage.getItem('ruta')+"&tipo="+localStorage.getItem('tipo'),
         dataType: 'json',
         success: function(respuesta){
+            //subirArchivo(localStorage.getItem('rutaActual'));
             //console.log(respuesta);
             //console.log(respuesta.carpetas.length);
             if(respuesta.carpetas.length==0){
@@ -411,11 +412,12 @@ $(document).ready(function(){
         data: 'ruta='+localStorage.getItem('ruta')+"&tipo="+localStorage.getItem('tipo'),
         dataType: 'json',
         success: function(respuesta){
+          //  subirArchivo(localStorage.getItem('rutaActual'));
             //console.log("dasdasdasdasdasdasd");
             //console.log(respuesta);
             //console.log(respuesta.archivos.length);
             if(respuesta.archivos.length==0){
-                $('#row-archivos').append('<div id="sin-archivos" class="tipo-objeto">No hay archivos.</div>');
+                $('#row-archivos').html('<div id="sin-archivos" class="tipo-objeto">No hay archivos.</div>');
             }else{
                 $('#sin-archivos').remove();
                 $('#row-archivos').html('');
@@ -452,6 +454,7 @@ function cargarCarpetas(ruta){
         data: 'ruta='+localStorage.getItem('rutaActual')+"&tipo="+localStorage.getItem('tipo'),
         dataType: 'json',
         success: function(respuesta){
+        //    subirArchivo(localStorage.getItem('rutaActual'));
             //console.log(respuesta);
             //console.log(respuesta.carpetas.length);
             if(respuesta.carpetas.length==0){
@@ -486,11 +489,12 @@ function cargarArchivos(ruta){
         data: 'ruta='+localStorage.getItem('rutaActual')+"&tipo="+localStorage.getItem('tipo'),
         dataType: 'json',
         success: function(respuesta){
+     //       subirArchivo(localStorage.getItem('rutaActual'));
             //console.log("dasdasdasdasdasdasd");
             //console.log(respuesta);
             //console.log(respuesta.archivos.length);
             if(respuesta.archivos.length==0){
-                $('#row-archivos').append('<div id="sin-archivos" class="tipo-objeto">No hay archivos.</div>');
+                $('#row-archivos').html('<div id="sin-archivos" class="tipo-objeto">No hay archivos.</div>');
             }else{
                 $('#sin-archivos').remove();
                 $('#row-archivos').html('');
@@ -537,9 +541,10 @@ function tipo(string,isn){
     }else if(partes[1] == 'docx'){
         $(".icono-archivo"+isn).addClass('fas fa-file-word');
         $(".icono-archivo"+isn).css('color','green');
-    }else if(partes[1] == 'jpg' || partes[1] == 'png'|| partes[1] == 'gif'){
-        $('#div-imagen'+isn).html('<img class="imagen" src="'+localStorage.getItem('rutaActual')+string+'"></img>');
+    }else if(partes[1] == 'jpg' || partes[1] == 'png'|| partes[1] == 'jpeg' || partes[1] == 'gif'){
         $(".icono-archivo"+isn).addClass('fas fa-image');
+        $(".icono-archivo"+isn).css('color','#ffc700');
+        $('#div-imagen'+isn).html('<img class="imagen" src="'+localStorage.getItem('rutaActual')+string+'"></img>');
     }else if(partes[1] == 'pdf'){
         $(".icono-archivo"+isn).addClass('fas fa-file-pdf');
         $(".icono-archivo"+isn).css('color','red');
@@ -561,6 +566,17 @@ function descargar(nombre){
     console.log('ruta:'+src);
     $('#a-download').attr('href',src);
     $('#a-download').attr('download',nombre);
+    var partes = [];
+    partes = nombre.split('.');
+    if(partes[1] == 'jpg' || partes[1] == 'png'|| partes[1] == 'jpeg' || partes[1] == 'gif'){
+        $('#li-vista').attr("data-toggle","modal");
+        $('#li-vista').attr("data-target","#modal-imagen");
+        $('#imagen-de-modal').html('<img  style="width: 100%;" src="'+src+'">');
+    }else{
+        $('#imagen-de-modal').html('');
+        $('#li-vista').removeAttr('data-target');
+        $('#li-vista').removeAttr('data-toggle');
+    }
 }
 
 
@@ -600,7 +616,11 @@ function nuevaRuta(nombre){
             cargarCarpetas(j);
             cargarArchivos(j);
             if(localStorage.getItem('tipo')==2){
-                e = 'home'+j.substr(6);
+                if(localStorage.getItem('carpeta')>9){
+                    e = 'home'+j.substr(7);
+                }else{
+                    e = 'home'+j.substr(6);
+                }
                 $('#span-ruta').html(acortarRuta(e));
             }else{
                 $('#span-ruta').html(acortarRuta(j));
@@ -626,11 +646,16 @@ function carpetaAtras(){
             e = e + temp[i]+'/';
             console.log(temp[i]+'\n');
         }
+        console.log(e);
         localStorage.setItem('rutaActual',e);
         cargarCarpetas(localStorage.getItem('rutaActual'));
         cargarArchivos(localStorage.getItem('rutaActual'));
         if(localStorage.getItem('tipo')==2){
-            e = 'home'+localStorage.getItem('rutaActual').substr(6);
+            if(localStorage.getItem('carpeta')>9){
+                e = 'home'+localStorage.getItem('rutaActual').substr(7);
+            }else{
+                e = 'home'+localStorage.getItem('rutaActual').substr(6);
+            }
             $('#span-ruta').html(acortarRuta(e));
         }else{
             $('#span-ruta').html(acortarRuta(localStorage.getItem('rutaActual')));
@@ -701,6 +726,7 @@ function eliminarArchivo(){
             }
         },
         error: function(error){
+            alert('La carpeta no esta vacia');
             console.log(error);
         }
     });
@@ -709,19 +735,37 @@ function eliminarArchivo(){
 
 
 function buscar(){
-    var parametros = 'ruta='+localStorage.getItem('rutaActual')+'&string='+$('#input-busqueda').val();
+    var parametros = 'ruta='+localStorage.getItem('ruta')+'&string='+$('#input-buscar').val();
     $.ajax({
-        url: 'ajax/funciones.php?accion=buscar',
+        url: 'ajax/funciones.php?accion=buscarArchivo',
         method: 'GET',
         data: parametros,
         dataType: 'json',
         success: function(respuesta){
             console.log(respuesta);
-            if(respuesta.valor == 1){
-                $('#row-archivos').html('');
-                $('#row-carpetas').html('');
-                cargarCarpetas(localStorage.getItem('rutaActual'));
-                cargarArchivos(localStorage.getItem('rutaActual'));
+            $('#resultado-respuesta').html('');
+            $('#resultado-respuesta').append('');
+            $('#resultado-mensaje').html('Resultados de busqueda:');
+            if(respuesta.valor == 1){    
+                if(localStorage.getItem('tipo')==2){
+                    var gh = 'home/'+respuesta.rutaDeArchivo.substr(11);
+                }else{
+                    var gh = 'data/'+respuesta.rutaDeArchivo.substr(9);
+                }
+                console.log("cargarArchivos: "+respuesta.rutaDeArchivo);
+                $('#resultado-respuesta').append(gh+'<br>');
+                $('#resultado-respuesta').append('<div>'+
+                '<div class="carpeta-archivo" style="height: 40px;">'+
+                        '<div class="pie-imagen">'+
+                            '<i class="icono-archivoResultado" style="margin-left: 8px;"></i>'+
+                            '<div class="nombre-archivo" id="nombre-archivo" acortarNombres(this)>'+acortarNombres(respuesta.string)+'</div>'+
+                        '</div>'+
+                    '</div>'+
+                '</div>');
+                tipo(gh,"Resultado");
+                //$('#div-imagenResultado').html('<img class="imagen" src="'+gh+'"></img>');
+            }else{
+                $('#resultado-respuesta').append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No hay resultados');
             }
         },
         error: function(error){
@@ -729,6 +773,34 @@ function buscar(){
         }
     });
 }
+
+
+
+
+/*
+function subirArchivo(ruta){
+    $.ajax({
+        url: 'pagina-principal.php',
+        method: "GET",
+        data: "ruta="+ruta,
+        /*dataType: '',
+        success: function(respuesta){
+            console.log(respuesta);
+            if(respuesta.valor == 1){
+                alert('Guardado con exito');
+            }
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
+}*/
+
+
+function reset(){
+    $('#form-subir').reset();
+}
+
 
 
 
